@@ -68,7 +68,7 @@ func SaveImage2(file *multipart.FileHeader) (*request.InforFileResp, error) {
 			UpdatedAt: create_at,
 		}, nil
 	}
-	baseDir := "stores"
+	baseDir := "shader"
 	newFileName := GenUuid()
 	//fileExt := filepath.Ext(file.Filename)
 	fileName := newFileName + fileExt
