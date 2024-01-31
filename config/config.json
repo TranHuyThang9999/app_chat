@@ -1,0 +1,9 @@
+{
+    "url_imgbb":"https://api.imgbb.com/1/upload?key=35ab53548bf387fc865eded79efa0a19",
+    "data_source":"host=localhost user=postgres password=1234 dbname=app_chat port=5432 sslmode=disable TimeZone=Asia/Shanghai",
+    "port":"8080",
+    "access_secret":"secretAAAAAAAAAAAaaaaaaaaassssdsv",
+    "expire_access":"24h",
+    "refresh_secret":"secretAAAAAAAAAAAaaaaaaaaassssdsv",
+    "expire_refresh":"168h"
+}
