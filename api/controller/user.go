@@ -35,7 +35,7 @@ func (o *ControllerUser) AddAcount(ctx *gin.Context) {
 		})
 		return
 	}
-	log.Infof("req : ", req.File.Filename)
+	log.Infof("req : ", req.Email)
 	req.File = file
 	resp, err := o.user.AddAccount(ctx, &req)
 

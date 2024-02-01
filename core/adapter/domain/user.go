@@ -8,6 +8,7 @@ type Users struct {
 	Age       int    `json:"age"`
 	Address   string `json:"address"`
 	Avatar    string `json:"avatar"`
+	Email     string `json:"email"`
 	CreatedAt int64  `json:"created_at"`
 }
 

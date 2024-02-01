@@ -9,6 +9,7 @@ type User struct {
 	UserName string                `form:"user_name"`
 	Age      int                   `form:"age"`
 	Address  string                `form:"address"`
+	Email    string                `form:"email"`
 	File     *multipart.FileHeader `form:"file"`
 }
 

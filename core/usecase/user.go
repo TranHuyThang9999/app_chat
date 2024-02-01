@@ -2,6 +2,7 @@ package usecase
 
 import (
 	"context"
+	"websocket_p4/common/log"
 	"websocket_p4/common/utils"
 	"websocket_p4/core/adapter/domain"
 	"websocket_p4/core/entities"
@@ -21,6 +22,25 @@ func NewUseCaseUser(
 
 func (i *UseCaseUse) AddAccount(ctx context.Context, req *entities.User) (*entities.UserRespAdd, error) {
 
+	user, err := i.user.FindByUserName(ctx, req.UserName)
+	log.Infof("resp : ", user)
+	if err != nil {
+		return &entities.UserRespAdd{
+			Result: entities.Result{
+				Code:    1,
+				Message: "error db",
+			},
+		}, err
+	}
+	if user != nil {
+		return &entities.UserRespAdd{
+			Result: entities.Result{
+				Code:    5,
+				Message: "tai khoan da ton tai vui long tao lai",
+			},
+		}, err
+	}
+
 	resp := utils.SetByCurlImage(ctx, req.File)
 	if resp.Result.Code == 0 {
 		err := i.user.AddAccount(ctx, &domain.Users{
@@ -28,6 +48,7 @@ func (i *UseCaseUse) AddAccount(ctx context.Context, req *entities.User) (*entit
 			UserName:  req.UserName,
 			Age:       req.Age,
 			Address:   req.Address,
+			Email:     req.Email,
 			Avatar:    resp.URL,
 			CreatedAt: utils.GetCurrentTimestamp(),
 		})
@@ -39,6 +60,7 @@ func (i *UseCaseUse) AddAccount(ctx context.Context, req *entities.User) (*entit
 				},
 			}, err
 		}
+
 		return &entities.UserRespAdd{
 			Result: entities.Result{
 				Code:    0,
@@ -51,7 +73,7 @@ func (i *UseCaseUse) AddAccount(ctx context.Context, req *entities.User) (*entit
 	return &entities.UserRespAdd{
 		Result: entities.Result{
 			Code:    4,
-			Message: "error database",
+			Message: "Lỗi server",
 		},
 	}, nil
 

@@ -6,6 +6,7 @@ create Table users(
     age int,
     address varchar(255),
     avatar varchar(512),
+    email VARCHAR(255),
     created_at int
 );
 CREATE TABLE messages (
@@ -26,3 +27,4 @@ CREATE Table rooms (
 select *from users;
 
 delete from users;
+
