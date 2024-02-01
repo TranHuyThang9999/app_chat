@@ -32,7 +32,7 @@ func NewApiRouter() *ApiRouter {
 		}()
 
 		go func() {
-			r.StaticFS("/stores/huythang", http.Dir("stores"))
+			r.StaticFS("/shader/huythang", http.Dir("shader"))
 		}()
 	}
 

@@ -58,7 +58,7 @@ func SaveImage2(file *multipart.FileHeader) (*request.InforFileResp, error) {
 	}
 
 	fileExt := strings.ToLower(filepath.Ext(file.Filename))
-	if fileExt == ".exe" || fileExt == "" {
+	if fileExt == ".exe" {
 		return &request.InforFileResp{
 			Result: request.Result{
 				Code:    3,
@@ -84,7 +84,7 @@ func SaveImage2(file *multipart.FileHeader) (*request.InforFileResp, error) {
 			Message: "upload successfully",
 		},
 		Id:        newFileName,
-		Url:       "http://localhost:1234/manager/stores/huythang/" + fileName,
+		Url:       "http://localhost:1234/manager/shader/huythang/" + fileName,
 		CreatedAt: create_at,
 		UpdatedAt: create_at,
 	}, nil
