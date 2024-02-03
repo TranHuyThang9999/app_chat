@@ -1,0 +1,87 @@
+body {
+    background-color: #4158D0;
+    background-image: linear-gradient(43deg, #4158D0 40%, #C850C0 50%, #FFCC70 100%);
+    margin: 0;
+    padding: 0;
+}
+
+.nav-home {
+    display: flex;
+    background-color: #C850C0;
+    justify-content: space-between;
+}
+
+.nav-home li {
+    display: flex;
+    height: 50px;
+    margin-left: 15px;
+    margin-right: 15px;
+    color: white;
+    font-size: 16px;
+    align-items: center;
+}
+
+.content-start-home {
+    display: flex;
+    justify-content: center;
+}
+
+.message-home {
+    display: flex;
+    font-size: 35px;
+    margin-right: 20px;
+}
+
+
+.login-form {
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    max-width: 500px;
+    height: 550px;
+    margin: 50px auto;
+    /* Cách top 50px */
+}
+
+.form-login-input {
+    width: 100%;
+    height: 60px;
+}
+
+.button-login-app-chat {
+    width: 100%;
+    height: 50px;
+    background-color: #4158D0;
+    color: white;
+
+}
+
+:where(.css-dev-only-do-not-override-xu9wm8).ant-btn>span {
+    display: inline-block;
+    font-size: 17px;
+}
+
+:where(.css-dev-only-do-not-override-xu9wm8).ant-form-item .ant-form-item-label>label {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    max-width: 100%;
+    height: 32px;
+    color: rgba(0, 0, 0, 0.88);
+    font-size: 17px;
+}
+.login-form-home-element{
+    margin-top: 50px;    
+}
+
+.sign-up-form{
+    background-color: white;
+    padding: 40px;
+    /* border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
+    max-width: 500px;
+    height: 600px;
+    margin: 50px auto;
+    /* Cách top 50px */
+}
