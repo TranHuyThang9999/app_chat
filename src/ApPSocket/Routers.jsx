@@ -6,36 +6,33 @@ import Profile from './Profile'
 
 export default function Routers() {
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
-  
+  let content = null;
+
   const handleLoginSuccess = () => {
-    setIsLoggedIn(true);
     setShowProfile(true);
   };
-  const handleLogout = () => {
-    localStorage.removeItem('user_name');
-    setIsLoggedIn(false);
-    setShowProfile(false);
-  };
+
 
   useEffect(() => {
     const user_name = localStorage.getItem('user_name');
     if (user_name) {
-      setIsLoggedIn(true);
       setShowProfile(true);
     }
   }, []);
 
+  const backToHome = () => {
+    setShowProfile(false);  
+  };
+  
+  if (showProfile){
+    content = <Profile backToHome={backToHome} />;
+  }else{
+    content = <Home onLoginSuccess={handleLoginSuccess}/>
+  }
   return (
     <div>
-      {isLoggedIn && (
-        <Button onClick={handleLogout} style={{ marginBottom: '16px' }}>
-          Logout
-        </Button>
-      )}
-
-      {showProfile ? <Profile /> : <Home onLoginSuccess={handleLoginSuccess} />}
+      {content}
     </div>
   )
 }
