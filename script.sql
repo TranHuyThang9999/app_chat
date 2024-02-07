@@ -17,6 +17,16 @@ CREATE TABLE messages (
     created_at INT
 );
 
+CREATE TABLE message_status (
+    id BIGINT PRIMARY KEY,
+    message_id BIGINT,
+    sender_id BIGINT,
+    recipient_id BIGINT,
+    is_sent BOOLEAN,--để đánh dấu xem tin nhắn đã được gửi thành công hay chưa.
+    is_received BOOLEAN,-- để đánh dấu xem tin nhắn đã được người nhận nhận được hay chưa.
+    created_at INT,
+);
+
 CREATE Table rooms (
     id BIGINT PRIMARY KEY,
     sender_id BIGINT,
@@ -28,3 +38,4 @@ select *from users;
 
 delete from users;
 
+SELECT * FROM "users" WHERE user_name = 'thang' ORDER BY "users"."id" LIMIT 1

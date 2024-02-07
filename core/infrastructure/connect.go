@@ -1,4 +1,4 @@
-package adapter
+package infrastructure
 
 import (
 	"fmt"

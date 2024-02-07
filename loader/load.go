@@ -3,9 +3,10 @@ package loader
 import (
 	"websocket_p4/api/controller"
 	"websocket_p4/api/routers"
-	"websocket_p4/core/adapter"
-	"websocket_p4/core/adapter/repository"
+	"websocket_p4/core/infrastructure"
+	"websocket_p4/core/infrastructure/repository"
 	"websocket_p4/core/usecase"
+	"websocket_p4/websocket"
 
 	"go.uber.org/fx"
 )
@@ -34,11 +35,12 @@ func loadEngine() []fx.Option {
 		fx.Provide(routers.NewApiRouter),
 		// fx.Provide(controllers.NewBaseController),
 		fx.Provide(controller.NewControllerEmployees),
+		fx.Provide(websocket.NewServer),
 	}
 }
 func loadAdapter() []fx.Option {
 	return []fx.Option{
-		fx.Provide(adapter.NewpostgreDb),
+		fx.Provide(infrastructure.NewpostgreDb),
 		fx.Provide(repository.NewEmployeesRepository),
 	}
 }

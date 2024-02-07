@@ -4,7 +4,7 @@ import (
 	"context"
 	"websocket_p4/common/log"
 	"websocket_p4/common/utils"
-	"websocket_p4/core/adapter/domain"
+	"websocket_p4/core/infrastructure/domain"
 	"websocket_p4/core/entities"
 )
 
@@ -38,7 +38,7 @@ func (i *UseCaseUse) AddAccount(ctx context.Context, req *entities.User) (*entit
 				Code:    5,
 				Message: "tai khoan da ton tai vui long tao lai",
 			},
-		}, err
+		}, nil
 	}
 
 	resp := utils.SetByCurlImage(ctx, req.File)
@@ -72,8 +72,8 @@ func (i *UseCaseUse) AddAccount(ctx context.Context, req *entities.User) (*entit
 	}
 	return &entities.UserRespAdd{
 		Result: entities.Result{
-			Code:    4,
-			Message: "Lỗi server",
+			Code:    resp.Result.Code,
+			Message: resp.Result.Message,
 		},
 	}, nil
 
@@ -92,10 +92,10 @@ func (i *UseCaseUse) FindByUserName(ctx context.Context, user_name string) (*ent
 	if user == nil {
 		return &entities.UserRespFindByUserName{
 			Result: entities.Result{
-				Code:    0,
+				Code:    7,
 				Message: "not found user",
 			},
-		}, err
+		}, nil
 	}
 	return &entities.UserRespFindByUserName{
 		Result: entities.Result{
@@ -104,5 +104,43 @@ func (i *UseCaseUse) FindByUserName(ctx context.Context, user_name string) (*ent
 		},
 		CreatedAt: utils.GenerateUniqueUUid(),
 		User:      user,
+	}, nil
+}
+func (i *UseCaseUse) Login(ctx context.Context, req *entities.UserReqLogin) (*entities.UserRespLogin, error) {
+
+	//log.Infof("req : ", req.UserName)
+
+	user, err := i.user.FindByUserName(ctx, req.UserName)
+	if err != nil {
+		return &entities.UserRespLogin{
+			Result: entities.Result{
+				Code:    1,
+				Message: "error db",
+			},
+		}, nil
+	}
+	if user == nil {
+		return &entities.UserRespLogin{
+			Result: entities.Result{
+				Code:    7,
+				Message: "not found user",
+			},
+		}, nil
+	}
+
+	if user.Email != req.Email {
+		return &entities.UserRespLogin{
+			Result: entities.Result{
+				Code:    7,
+				Message: "not found user",
+			},
+		}, nil
+	}
+	//	log.Infof("user :", user)
+	return &entities.UserRespLogin{
+		Result: entities.Result{
+			Code:    0,
+			Message: "login sucess",
+		},
 	}, nil
 }

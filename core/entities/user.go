@@ -2,7 +2,7 @@ package entities
 
 import (
 	"mime/multipart"
-	"websocket_p4/core/adapter/domain"
+	"websocket_p4/core/infrastructure/domain"
 )
 
 type User struct {
@@ -26,4 +26,12 @@ type UserRespFindByUserName struct {
 	Result    Result        `json:"result"`
 	CreatedAt int64         `json:"created_at"`
 	User      *domain.Users `json:"user"`
+}
+type UserRespLogin struct {
+	Result    Result `json:"result"`
+	CreatedAt int64  `json:"created_at"`
+}
+type UserReqLogin struct {
+	UserName string `form:"user_name"`
+	Email    string `form:"email"`
 }

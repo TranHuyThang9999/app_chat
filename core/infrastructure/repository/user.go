@@ -4,8 +4,8 @@ import (
 	"context"
 	"errors"
 	"websocket_p4/common/configs"
-	"websocket_p4/core/adapter"
-	"websocket_p4/core/adapter/domain"
+	"websocket_p4/core/infrastructure"
+	"websocket_p4/core/infrastructure/domain"
 
 	"gorm.io/gorm"
 )
@@ -14,7 +14,7 @@ type CollectionUser struct {
 	collection *gorm.DB
 }
 
-func NewEmployeesRepository(cf *configs.Configs, emp *adapter.PostGresql) domain.RepositoryUser {
+func NewEmployeesRepository(cf *configs.Configs, emp *infrastructure.PostGresql) domain.RepositoryUser {
 	return &CollectionUser{
 		collection: emp.CreateCollection(),
 	}

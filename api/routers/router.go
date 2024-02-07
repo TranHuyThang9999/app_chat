@@ -3,6 +3,7 @@ package routers
 import (
 	"websocket_p4/api/controller"
 	"websocket_p4/common/configs"
+	"websocket_p4/websocket"
 
 	"github.com/gin-gonic/gin"
 	cors "github.com/rs/cors/wrapper/gin"
@@ -14,6 +15,7 @@ type ApiRouter struct {
 
 func NewApiRouter(
 	user *controller.ControllerUser,
+	socket *websocket.Server,
 	cf *configs.Configs,
 ) *ApiRouter {
 	engine := gin.New()
@@ -30,8 +32,9 @@ func NewApiRouter(
 	})
 	r.POST("/add", user.AddAcount)
 	r.GET("/find", user.GetUserByUserName)
+	r.POST("/login", user.Login)
 	//socket
-
+	r.GET("/ws", socket.RunSocket)
 	return &ApiRouter{
 		Engine: engine,
 	}

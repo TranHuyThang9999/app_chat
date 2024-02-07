@@ -7,11 +7,35 @@ import (
 	"io"
 	"mime/multipart"
 	"net/http"
+	"path/filepath"
+	"strings"
 	"websocket_p4/core/entities"
 )
 
+//	jpg,jpeg,gif,png,svg
+
 func SetByCurlImage(ctx context.Context, file *multipart.FileHeader) *entities.UploadResponse {
+
 	filePath := file.Filename
+	fileExt := strings.ToLower(filepath.Ext(file.Filename))
+
+	acceptedExts := []string{".jpg", ".jpeg", ".gif", ".png", ".svg"}
+	accepted := false
+	for _, ext := range acceptedExts {
+		if fileExt == ext {
+			accepted = true
+			break
+		}
+	}
+
+	if !accepted {
+		return &entities.UploadResponse{
+			Result: entities.Result{
+				Code:    7,
+				Message: "Định dạng file không hợp lệ",
+			},
+		}
+	}
 
 	// Tạo một multipart form data
 	bodyBuf := &bytes.Buffer{}
