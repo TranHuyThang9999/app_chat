@@ -22,6 +22,8 @@ func Load() []fx.Option {
 func loadUseCase() []fx.Option {
 	return []fx.Option{
 		fx.Provide(usecase.NewUseCaseUser),
+		fx.Provide(websocket.NewServer),
+		fx.Provide(websocket.NewManagerClient),
 	}
 }
 
@@ -35,7 +37,6 @@ func loadEngine() []fx.Option {
 		fx.Provide(routers.NewApiRouter),
 		// fx.Provide(controllers.NewBaseController),
 		fx.Provide(controller.NewControllerEmployees),
-		fx.Provide(websocket.NewServer),
 	}
 }
 func loadAdapter() []fx.Option {
