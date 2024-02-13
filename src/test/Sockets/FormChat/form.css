@@ -1,0 +1,15 @@
+@media only screen and (max-width: 430px) {
+    .form-container-message {
+        max-width: 500px;
+        height: 550px;
+        margin: 50px auto;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .form-container-message {
+        max-width: 500px;
+        height: 550px;
+        margin: 110px 50px 120px auto;
+    }
+}

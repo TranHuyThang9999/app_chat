@@ -125,6 +125,7 @@ export default function Profile({ backToHome }) {
             <li>{informationFindByUserName.user_name}</li>
             <li>{informationFindByUserName.email}</li>
             <li>{informationFindByUserName.address}</li>
+            <li>{informationFindByUserName.age}</li>
             <li>
               <Avatar src={informationFindByUserName.avatar}/>
             </li>
