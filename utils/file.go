@@ -6,6 +6,7 @@ import (
 	"mime/multipart"
 	"os"
 	"path/filepath"
+	"strconv"
 	"strings"
 
 	"github.com/google/uuid"
@@ -58,19 +59,19 @@ func SaveImage2(file *multipart.FileHeader) (*request.InforFileResp, error) {
 	}
 
 	fileExt := strings.ToLower(filepath.Ext(file.Filename))
-	if fileExt == ".exe" {
-		return &request.InforFileResp{
-			Result: request.Result{
-				Code:    3,
-				Message: "Tệp không hợp lệ",
-			},
-			CreatedAt: create_at,
-			UpdatedAt: create_at,
-		}, nil
-	}
+	//if fileExt == ".exe" {
+	//	return &request.InforFileResp{
+	//		Result: request.Result{
+	//			Code:    3,
+	//			Message: "Tệp không hợp lệ",
+	//		},
+	//		CreatedAt: create_at,
+	//		UpdatedAt: create_at,
+	//	}, nil
+	//}
 	baseDir := "shader"
-	newFileName := GenUuid()
-	//fileExt := filepath.Ext(file.Filename)
+	//newFileName := GenUuid()
+	newFileName := strconv.FormatInt(GenerateUniqueKey(), 10) //fileExt := filepath.Ext(file.Filename)
 	fileName := newFileName + fileExt
 	filePath := filepath.Join(baseDir, fileName)
 
