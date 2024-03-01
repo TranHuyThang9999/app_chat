@@ -1,14 +1,16 @@
-package adapter
+package repository
 
-import "context"
+import (
+	"context"
+)
 
-// ChatMessage đại diện cho một tin nhắn trong chat
 type ChatMessages struct {
-	Id        int64  `json:"id"`
-	IdUser    int64  `json:"id_user"`
-	Content   string `json:"content"`
-	CreatedAt int64  `json:"created_at"`
-	UpdatedAt int64  `json:"updated_at"`
+	Id         int64  `json:"id"`
+	IdUserSend int64  `json:"id_user"`
+	Content    string `json:"content"`
+	File       string `json:"file"`
+	CreatedAt  int64  `json:"created_at"`
+	UpdatedAt  int64  `json:"updated_at"`
 }
 
 // User đại diện cho một người dùng trong chat

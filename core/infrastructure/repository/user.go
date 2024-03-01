@@ -35,3 +35,8 @@ func (u *CollectionUser) FindByUserName(ctx context.Context, user_name string) (
 	}
 	return user, result.Error
 }
+func (u *CollectionUser) GetAllUser(ctx context.Context) ([]*domain.Users, error) {
+	var users []*domain.Users
+	result := u.collection.Find(&users)
+	return users, result.Error
+}

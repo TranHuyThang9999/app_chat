@@ -35,3 +35,16 @@ type UserReqLogin struct {
 	UserName string `form:"user_name"`
 	Email    string `form:"email"`
 }
+
+type UserResponseGetAll struct {
+	UserName string `json:"user_name"`
+	Age      int    `json:"age"`
+	Address  string `json:"address"`
+	Email    string `json:"email"`
+	File     string `json:"file"`
+}
+
+type UserResListpGetAll struct {
+	Result Result                `json:"result"`
+	User   []*UserResponseGetAll `json:"user"`
+}

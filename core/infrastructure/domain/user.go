@@ -15,4 +15,5 @@ type Users struct {
 type RepositoryUser interface {
 	AddAccount(ctx context.Context, req *Users) error
 	FindByUserName(ctx context.Context, user_name string) (*Users, error)
+	GetAllUser(ctx context.Context) ([]*Users, error)
 }

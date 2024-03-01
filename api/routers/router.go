@@ -33,6 +33,7 @@ func NewApiRouter(
 	r.POST("/add", user.AddAcount)
 	r.GET("/find", user.GetUserByUserName)
 	r.POST("/login", user.Login)
+	r.GET("/all", user.GetAllUser)
 	//socket
 	r.GET("/ws", managerClient.ServerWs)
 

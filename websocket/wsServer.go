@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"sync"
 	"websocket_p4/common/log"
-	"websocket_p4/websocket/models"
+	"websocket_p4/websocket/internal/models"
 
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
@@ -33,9 +33,7 @@ func NewServer() *server {
 	return server
 }
 
-func (s *server) runSocket(c *gin.Context) {
-
-	room := c.Query("room")
+func (s *server) runSocket(c *gin.Context, room string) {
 
 	conn, err := s.upgrader.Upgrade(c.Writer, c.Request, nil)
 	if err != nil {
@@ -69,11 +67,11 @@ func (s *server) runSocket(c *gin.Context) {
 		var message models.Messages
 		err := conn.ReadJSON(&message)
 		if err != nil {
-			log.Infof("close websocket error ! ", err)
+			log.Error(err, "close websocket error ! ")
 			break
 		}
 		s.broadcast <- message
-		s.writeMessage(conn, message)
+		//s.writeMessage(conn, message)
 	}
 }
 
@@ -89,7 +87,7 @@ func (s *server) handleMessages(room string) {
 		for client := range client {
 			err := client.WriteJSON(message)
 			if err != nil {
-				log.Infof("Failed to write message to WebSocket client: %v", err)
+				log.Errorf(err, "Failed to write message to WebSocket client: %s")
 				client.Close()
 				delete(s.clients, client)
 			}

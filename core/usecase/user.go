@@ -3,9 +3,10 @@ package usecase
 import (
 	"context"
 	"websocket_p4/common/log"
+	"websocket_p4/common/mapper"
 	"websocket_p4/common/utils"
-	"websocket_p4/core/infrastructure/domain"
 	"websocket_p4/core/entities"
+	"websocket_p4/core/infrastructure/domain"
 )
 
 type UseCaseUse struct {
@@ -142,5 +143,31 @@ func (i *UseCaseUse) Login(ctx context.Context, req *entities.UserReqLogin) (*en
 			Code:    0,
 			Message: "login sucess",
 		},
+	}, nil
+}
+func (i *UseCaseUse) GetAllUser(ctx context.Context) (*entities.UserResListpGetAll, error) {
+	resp, err := i.user.GetAllUser(ctx)
+	if err != nil {
+		return &entities.UserResListpGetAll{
+			Result: entities.Result{
+				Code:    1,
+				Message: "error db",
+			},
+		}, nil
+	}
+	if resp == nil {
+		return &entities.UserResListpGetAll{
+			Result: entities.Result{
+				Code:    7,
+				Message: "not found user",
+			},
+		}, nil
+	}
+	return &entities.UserResListpGetAll{
+		Result: entities.Result{
+			Code:    0,
+			Message: "ok",
+		},
+		User: mapper.ConvertUserEntitiesToDomainList(resp),
 	}, nil
 }

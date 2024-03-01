@@ -14,6 +14,7 @@ CREATE TABLE messages (
     content text,
     sender_id BIGINT,
     recipient_id BIGINT,
+    room_id BIGINT,
     created_at INT
 );
 

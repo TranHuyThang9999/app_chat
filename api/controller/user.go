@@ -73,3 +73,11 @@ func (o *ControllerUser) Login(ctx *gin.Context) {
 	}
 	ctx.JSON(http.StatusOK, resp)
 }
+func (o *ControllerUser) GetAllUser(ctx *gin.Context) {
+	resp, err := o.user.GetAllUser(ctx)
+	if err != nil {
+		ctx.JSON(200, err)
+		return
+	}
+	ctx.JSON(http.StatusOK, resp)
+}
